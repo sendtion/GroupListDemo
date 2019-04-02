@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.sendtion.grouplistdemo.GroupRecyclerView
+        android:id="@+id/recyclerView"
+        app:group_background="@color/content_background"
+        app:group_center="false"
+        app:group_height="42dp"
+        app:group_has_header="false"
+        app:group_padding_left="16dp"
+        app:group_padding_right="16dp"
+        app:group_text_size="14sp"
+        app:group_text_color="#555555"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/content_background" />
+
+</RelativeLayout>
