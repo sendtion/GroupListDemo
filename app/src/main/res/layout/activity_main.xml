@@ -8,7 +8,7 @@
 
     <com.sendtion.grouplistdemo.GroupRecyclerView
         android:id="@+id/recyclerView"
-        app:group_background="@color/content_background"
+        app:group_background="@color/group_background"
         app:group_center="false"
         app:group_height="42dp"
         app:group_has_header="false"

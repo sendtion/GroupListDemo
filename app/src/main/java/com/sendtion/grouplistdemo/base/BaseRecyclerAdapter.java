@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 /**
  * 基本的适配器
  */
-public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
+public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     protected LayoutInflater mInflater;
     protected List<T> mItems;
@@ -34,8 +34,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final RecyclerView.ViewHolder holder = onCreateDefaultViewHolder(parent, viewType);
+    public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        final RecyclerViewHolder holder = onCreateDefaultViewHolder(parent, viewType);
         if (holder != null) {
             holder.itemView.setTag(holder);
             holder.itemView.setOnClickListener(onClickListener);
@@ -44,13 +44,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         onBindViewHolder(holder, mItems.get(position), position);
     }
 
-    protected abstract RecyclerView.ViewHolder onCreateDefaultViewHolder(ViewGroup parent, int type);
+    protected abstract RecyclerViewHolder onCreateDefaultViewHolder(ViewGroup parent, int type);
 
-    protected abstract void onBindViewHolder(RecyclerView.ViewHolder holder, T item, int position);
+    protected abstract void onBindViewHolder(RecyclerViewHolder holder, T item, int position);
 
     @Override
     public int getItemCount() {

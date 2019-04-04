@@ -3,16 +3,16 @@ package com.sendtion.grouplistdemo;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout;
+import com.sendtion.grouplistdemo.base.RecyclerViewHolder;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.Map;
 
 /**
  * 适配器
@@ -22,51 +22,69 @@ import androidx.recyclerview.widget.RecyclerView;
 public class ArticleAdapter extends GroupRecyclerAdapter<String, Article> {
 
     private Context mContext;
+    private LinkedHashMap<String, List<Article>> mGroups;
 
     public ArticleAdapter(Context context) {
         super(context);
         mContext = context;
-        LinkedHashMap<String, List<Article>> map = new LinkedHashMap<>();
-        List<String> titles = new ArrayList<>();
-        map.put("今日推荐", create(0));
-        map.put("每周热点", create(1));
-        map.put("最高评论", create(2));
-        titles.add("今日推荐");
-        titles.add("每周热点");
-        titles.add("最高评论");
-        resetGroups(map,titles);
+//        LinkedHashMap<String, List<Article>> map = new LinkedHashMap<>();
+//        List<String> titles = new ArrayList<>();
+//        map.put("今日推荐", create(0));
+//        map.put("每周热点", create(1));
+//        map.put("最高评论", create(2));
+//        titles.add("今日推荐");
+//        titles.add("每周热点");
+//        titles.add("最高评论");
+//        setGroups(groups);
     }
 
-
-    @Override
-    protected RecyclerView.ViewHolder onCreateDefaultViewHolder(ViewGroup parent, int type) {
-        return new ArticleViewHolder(mInflater.inflate(R.layout.item_list_article, parent, false));
+    public void setGroups(LinkedHashMap<String, List<Article>> groups) {
+        mGroups = (groups != null) ? groups : new LinkedHashMap<String, List<Article>>();
+        List<String> mTitles = new ArrayList<>();
+        for(Map.Entry<String, List<Article>> entry : groups.entrySet()){
+            mTitles.add(entry.getKey());
+        }
+        resetGroups(mGroups, mTitles);
     }
 
     @Override
-    protected void onBindViewHolder(RecyclerView.ViewHolder holder, Article item, int position) {
-        ArticleViewHolder h = (ArticleViewHolder) holder;
-        h.mTextTitle.setText(item.getTitle());
-        h.mTextContent.setText(item.getContent());
+    protected RecyclerViewHolder onCreateDefaultViewHolder(ViewGroup parent, int type) {
+        return new RecyclerViewHolder(mInflater.inflate(R.layout.item_list_article, parent, false));
+    }
+
+    @Override
+    protected void onBindViewHolder(RecyclerViewHolder holder, Article item, int position) {
+        holder.setText(R.id.tv_title, item.getTitle());
+        holder.setText(R.id.tv_content, item.getContent());
         Glide.with(mContext)
                 .load(item.getImgUrl())
                 .asBitmap()
                 .centerCrop()
-                .into(h.mImageView);
+                .into(holder.getImageView(R.id.imageView));
+        final EasySwipeMenuLayout swipeMenuLayout = (EasySwipeMenuLayout) holder.getView(R.id.layout_swipe);
+        swipeMenuLayout.setCanRightSwipe(false);
+        holder.getTextView(R.id.tv_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "分享", Toast.LENGTH_SHORT).show();
+                swipeMenuLayout.resetStatus();
+            }
+        });
+        holder.getTextView(R.id.tv_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "删除", Toast.LENGTH_SHORT).show();
+                swipeMenuLayout.resetStatus();
+            }
+        });
+        holder.getTextView(R.id.tv_star).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "收藏", Toast.LENGTH_SHORT).show();
+                swipeMenuLayout.resetStatus();
+            }
+        });
     }
-
-    private static class ArticleViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextTitle, mTextContent;
-        private ImageView mImageView;
-
-        private ArticleViewHolder(View itemView) {
-            super(itemView);
-            mTextTitle = itemView.findViewById(R.id.tv_title);
-            mTextContent = itemView.findViewById(R.id.tv_content);
-            mImageView = itemView.findViewById(R.id.imageView);
-        }
-    }
-
 
     private static Article create(String title, String content, String imgUrl) {
         Article article = new Article();
