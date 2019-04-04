@@ -1,0 +1,2 @@
+# GroupListDemo
+结合XRecyclerView实现下拉刷新和上拉加载，实现列表粘性头部分组
