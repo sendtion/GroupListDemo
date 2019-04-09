@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.sendtion.grouplistdemo.GroupRecyclerView
+    <com.sendtion.grouplistdemo.group.GroupRecyclerView
         android:id="@+id/recyclerView"
         app:group_background="@color/group_background"
         app:group_center="false"

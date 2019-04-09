@@ -5,6 +5,8 @@ import android.os.SystemClock;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.sendtion.grouplistdemo.base.BaseActivity;
+import com.sendtion.grouplistdemo.group.GroupItemDecoration;
+import com.sendtion.grouplistdemo.group.GroupRecyclerView;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

@@ -1,4 +1,4 @@
-package com.sendtion.grouplistdemo;
+package com.sendtion.grouplistdemo.group;
 
 import android.content.Context;
 

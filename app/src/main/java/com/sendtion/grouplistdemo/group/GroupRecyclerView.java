@@ -1,4 +1,4 @@
-package com.sendtion.grouplistdemo;
+package com.sendtion.grouplistdemo.group;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 
 
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.sendtion.grouplistdemo.R;
 
 import androidx.annotation.Nullable;
 

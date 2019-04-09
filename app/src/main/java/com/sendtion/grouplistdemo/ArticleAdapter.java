@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.guanaj.easyswipemenulibrary.EasySwipeMenuLayout;
 import com.sendtion.grouplistdemo.base.RecyclerViewHolder;
+import com.sendtion.grouplistdemo.group.GroupRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
